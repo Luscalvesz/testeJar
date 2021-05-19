@@ -32,20 +32,18 @@ public class ChamarMetodos {
         Double processador = looca.getProcessador().getUso();
 
 
-        user.autenticar("carlinhosdev", "12345678");
 
 
 
 
-
-    //    dig.list("select * from diagnosticos");
+       dig.list("select * from diagnosticos");
 //        System.out.println("------------------------------------");
 //        dig.list("SELECT TOP 1 *\n" +
 //                    "  FROM diagnosticos\n" +
 //                    " ORDER\n" +
 //                    "    BY idDiagnostico DESC;");
 //        System.out.println("------------------------------------");
-
+//
 //        for (int i = 0; i < 10; i++) {
 //              dig.create(memoriaRam, volumes, processador, 1);
 //        }

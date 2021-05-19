@@ -1,0 +1,24 @@
+-classpath
+'C:/Users/Admin/OneDrive/햞ea de Trabalho/2ADSA-2021-1-Grupo-02/ConexaoBancoELoocaAPI/target/classes;C:/Users/Admin/.m2/repository/com/microsoft/sqlserver/mssql-jdbc/9.2.1.jre11/mssql-jdbc-9.2.1.jre11.jar;C:/Users/Admin/.m2/repository/net/java/dev/jna/jna/5.6.0/jna-5.6.0.jar;C:/Users/Admin/.m2/repository/net/java/dev/jna/jna-platform/5.6.0/jna-platform-5.6.0.jar;C:/Users/Admin/.m2/repository/com/github/oshi/oshi-core/5.3.6/oshi-core-5.3.6.jar;C:/Users/Admin/.m2/repository/org/slf4j/slf4j-api/1.7.30/slf4j-api-1.7.30.jar;C:/Users/Admin/.m2/repository/com/github/britooo/looca-api/1.0.1/looca-api-1.0.1.jar;C:/Users/Admin/.m2/repository/org/slf4j/slf4j-simple/1.7.30/slf4j-simple-1.7.30.jar'
+-encoding
+'Cp1252'
+-protected
+-sourcepath
+'C:/Users/Admin/OneDrive/햞ea de Trabalho/2ADSA-2021-1-Grupo-02/ConexaoBancoELoocaAPI/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2021. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Admin/OneDrive/햞ea de Trabalho/2ADSA-2021-1-Grupo-02/ConexaoBancoELoocaAPI/target/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'JDBC 1.0-SNAPSHOT API'
+-linkoffline
+'http://docs.oracle.com/javase/7/docs/api' 'C:/Users/Admin/OneDrive/햞ea de Trabalho/2ADSA-2021-1-Grupo-02/ConexaoBancoELoocaAPI/target/javadoc-bundle-options'
+-use
+-version
+-windowtitle
+'JDBC 1.0-SNAPSHOT API'
