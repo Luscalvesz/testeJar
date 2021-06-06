@@ -35,13 +35,13 @@ import java.awt.Color;
 import java.util.Timer;
 import java.util.TimerTask;
 import oshi.util.FormatUtil;
-import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.json.JSONObject;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
+import br.com.bustch.telasApp.Slack;
 
 /**
  *
@@ -68,7 +68,7 @@ public class TelaDashboards extends javax.swing.JFrame {
         initComponents();
         timer.scheduleAtFixedRate(timerDados, 0, SEGUNDOS);
     }
-    
+ 
     TimerTask timerDados = new TimerTask() {
         @Override
         public void run() {
@@ -95,18 +95,19 @@ public class TelaDashboards extends javax.swing.JFrame {
                     lblStatusCPU.setText("Crítico");
                     lblProcesadorRestante.setForeground(Color.red);
                     lblStatusCPU.setForeground(Color.red);
+                    
                     json.put("text", ":exclamation::exclamation::exclamation:CPU crítico:exclamation::exclamation::exclamation:");
                     Slack.sendMessage(json);
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                     try {
-                        RandomAccessFile diario = new RandomAccessFile(caminhoPasta, "rw");
+                        RandomAccessFile log = new RandomAccessFile(caminhoPasta, "rw");
 
-                        diario.seek(diario.length());
+                        log.seek(log.length());
 
-                        diario.writeBytes("\nHeloo World com Bytes");
+                        log.writeBytes("\nTeste");
 
-                        diario.close();
+                        log.close();
                     } catch (FileNotFoundException e) {
                         System.err.printf("Arquivo no encontrado: %s.\n", e.getMessage());
                     }
@@ -118,9 +119,9 @@ public class TelaDashboards extends javax.swing.JFrame {
                 
                 lblDiscoTotal.setText(FormatUtil.formatBytes(apiLooca.getGrupoDeDiscos().getTamanhoTotal()));
                 lblQtdDisco.setText(apiLooca.getGrupoDeDiscos().getQuantidadeDeDiscos().toString());
-                for (int i = 0; i < qtdDiscos; i++) {
-                    Long discoUsado = apiLooca.getGrupoDeDiscos().getTamanhoTotal() - apiLooca.getGrupoDeDiscos().getVolumes().get(i).getDisponivel();
-                    String discoRestante = FormatUtil.formatBytes(apiLooca.getGrupoDeDiscos().getVolumes().get(i).getDisponivel());
+                
+                    Long discoUsado = apiLooca.getGrupoDeDiscos().getTamanhoTotal() - apiLooca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel();
+                    String discoRestante = FormatUtil.formatBytes(apiLooca.getGrupoDeDiscos().getVolumes().get(0).getDisponivel());
                     
                     lblRestanteDisco.setText(discoRestante);
                             
@@ -141,18 +142,19 @@ public class TelaDashboards extends javax.swing.JFrame {
                         lblStatusDisco.setText("Crítico");
                         lblStatusDisco.setForeground(Color.red);
                         lblRestanteDisco.setForeground(Color.red);
+                        
                         json.put("text", ":exclamation::exclamation::exclamation:Disco crítico:exclamation::exclamation::exclamation:");
                         Slack.sendMessage(json);
                         
                         String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                         try {
-                            RandomAccessFile diario = new RandomAccessFile(caminhoPasta, "rw");
+                            RandomAccessFile log = new RandomAccessFile(caminhoPasta, "rw");
 
-                            diario.seek(diario.length());
+                            log.seek(log.length());
 
-                            diario.writeBytes("\nHeloo World com Bytes");
+                            log.writeBytes("\nTeste");
 
-                            diario.close();
+                            log.close();
                         } catch (FileNotFoundException e) {
                             System.err.printf("Arquivo n?o encontrado: %s.\n", e.getMessage());
                         }
@@ -162,9 +164,9 @@ public class TelaDashboards extends javax.swing.JFrame {
                         lblStatusDisco.setForeground(Color.blue);
                     }
                     
-                    lblCPU9.setText("Disponível do Disco " + (i + 1) + ":");
+                    lblCPU9.setText("Disponível do Disco " + 1 + ":");
                     lblDiscoUsado.setText(FormatUtil.formatBytes(discoUsado));
-                }
+                
                 
                 lblRAMTotal.setText(FormatUtil.formatBytes(apiLooca.getMemoria().getTotal()));
                 lblRAMUso.setText(FormatUtil.formatBytes(apiLooca.getMemoria().getEmUso()));
@@ -174,18 +176,19 @@ public class TelaDashboards extends javax.swing.JFrame {
                     lblStatusRAM.setText("Crítico");
                     lblStatusRAM.setForeground(Color.red);
                     lblRAMRestante.setForeground(Color.red);
+                    
                     json.put("text", ":exclamation::exclamation::exclamation:RAM crítica:exclamation::exclamation::exclamation:");
                     Slack.sendMessage(json);
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                     try {
-                        RandomAccessFile diario = new RandomAccessFile(caminhoPasta, "rw");
+                        RandomAccessFile log = new RandomAccessFile(caminhoPasta, "rw");
 
-                        diario.seek(diario.length());
+                        log.seek(log.length());
 
-                        diario.writeBytes("\nHeloo World com Bytes");
+                        log.writeBytes("\nTeste");
 
-                        diario.close();
+                        log.close();
                     } catch (FileNotFoundException e) {
                         System.err.printf("Arquivo n?o encontrado: %s.\n", e.getMessage());
                     }
