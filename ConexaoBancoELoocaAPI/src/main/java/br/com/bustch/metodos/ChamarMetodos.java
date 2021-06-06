@@ -31,12 +31,15 @@ public class ChamarMetodos {
         Double memoriaRam = (looca.getMemoria().getEmUso()) * 0.1;
         Double processador = looca.getProcessador().getUso();
 
+//        maq.list("select * from tb_maquinas;");
+
+        user.autenticar("usuario1", "senha1");
 
 
 
-
-
-       dig.list("select * from diagnosticos");
+//        dig.createOnDocker(memoriaRam, volumes, processador, 1);
+//        dig.create(memoriaRam, volumes, processador, 1);
+//       dig.list("select * from diagnosticos");
 //        System.out.println("------------------------------------");
 //        dig.list("SELECT TOP 1 *\n" +
 //                    "  FROM diagnosticos\n" +

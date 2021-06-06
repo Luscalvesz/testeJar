@@ -23,7 +23,9 @@ public class PegarDados {
         Double memoriaRam = (looca.getMemoria().getEmUso()) * 0.1;
         Double processador = looca.getProcessador().getUso();
 
+
+
         dig.create(memoriaRam, volumes, processador, 1);
-        
+        dig.createOnDocker(memoriaRam, volumes, processador, 1);
     }
 }

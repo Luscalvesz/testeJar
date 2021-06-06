@@ -13,4 +13,11 @@ public class ConnectionFactory {
 
         return connection;
     }
+//
+//    public Connection dockerConnection() throws SQLException {
+//        Connection connectionDocker = DriverManager
+//                .getConnection("jdbc:mysql://localhost:3306;dabaseName=logs", "root", "urubu100");
+//
+//        return connectionDocker;
+//    }
 }

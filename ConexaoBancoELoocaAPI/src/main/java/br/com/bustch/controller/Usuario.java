@@ -2,15 +2,26 @@ package br.com.bustch.controller;
 
 import br.com.bustch.getStatus.PegarDados;
 import br.com.bustch.connectionFactory.ConnectionFactory;
+import br.com.bustch.core.Looca;
+import br.com.bustch.util.Conversor;
+import com.github.britooo.looca.api.group.discos.DiscosGroup;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import oshi.util.FormatUtil;
 
 public class Usuario {
 
+    Diagnosticos dig = new Diagnosticos();
+
+    private Integer idDiagnostico = 0;
+    private Integer fkMaquina = 0;
     private Boolean userAutenticated = false;
+    Looca looca = new Looca();
+    Conversor conversor = new Conversor();
+    
         private Connection connection;
          PegarDados pg = new PegarDados();
 
@@ -84,18 +95,39 @@ public class Usuario {
                 System.out.println(e.getMessage());
             }
         }
+
         public void autenticar(String usuario, String senha){
             PreparedStatement stm = null;
             try{
-                stm = connection.prepareStatement("select * from usuario where userLogin = ?");
+                stm = connection.prepareStatement("select * from tb_maquinas where usuario = ?");
                 stm.setString(1, usuario);
                 Boolean userExist = stm.executeQuery().next();
+                ResultSet rs = stm.getResultSet();
                 if(userExist){
                     System.out.println("Login efetuado com sucesso!");
-                    pg.pegarDados();
                     userAutenticated = true;
+                    Integer id = rs.getInt("id");
+                    fkMaquina = id;
+                    System.out.println(fkMaquina);
+                    
+                    
+                    
+                    
+                    
+                    DiscosGroup grupoDeDiscos = looca.getGrupoDeDiscos();
+                    Long volumes = (grupoDeDiscos.getVolumes().get(0).getDisponivel() / 1000000);
+                    Double memoriaRam = (looca.getMemoria().getEmUso()) * 0.1;
+                    Double processador = looca.getProcessador().getUso();
+
+                    dig.update(memoriaRam, volumes, processador, getFkMaquina());
+
+
+
+
+                    
+                    
                 }else{
-                    System.out.println("Deu xabu");
+                    System.out.println("Erro ao tentar fazer o login");
                 }
             }catch (SQLException e){
                 System.out.println(e.getMessage());
@@ -104,6 +136,14 @@ public class Usuario {
 
     public Boolean getUserAutenticated() {
         return userAutenticated;
+    }
+
+    public Integer getFkMaquina() {
+        return fkMaquina;
+    }
+
+    public void setFkMaquina(Integer fkMaquina) {
+        this.fkMaquina = fkMaquina;
     }
 }
 
