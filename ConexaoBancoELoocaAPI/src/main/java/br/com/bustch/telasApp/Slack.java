@@ -10,7 +10,7 @@ import org.json.JSONObject;
 public class Slack {
 
     private static final HttpClient client = HttpClient.newHttpClient();
-    private static final String URL = "https://hooks.slack.com/services/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";
+    private static final String URL = "https://hooks.slack.com/services/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";
 
 
     public static void sendMessage(JSONObject content) throws IOException, InterruptedException {
