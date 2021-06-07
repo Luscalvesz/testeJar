@@ -105,7 +105,7 @@ public class TelaDashboards extends javax.swing.JFrame {
 
                         log.seek(log.length());
 
-                        log.writeBytes("\nTeste");
+                        log.writeBytes("\nTeste" + 2 + "oba");
 
                         log.close();
                     } catch (FileNotFoundException e) {
