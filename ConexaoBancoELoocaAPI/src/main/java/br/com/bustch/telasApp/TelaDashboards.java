@@ -59,6 +59,9 @@ public class TelaDashboards extends javax.swing.JFrame {
     Looca apiLooca = new Looca();
     Timer timer = new Timer();
     JSONObject json = new JSONObject();
+    Integer contador = 0;
+    Integer contador2 = 0;
+    Integer contador3 = 0;
     
     
     final long SEGUNDOS = (1000 * 3);
@@ -96,8 +99,13 @@ public class TelaDashboards extends javax.swing.JFrame {
                     lblProcesadorRestante.setForeground(Color.red);
                     lblStatusCPU.setForeground(Color.red);
                     
-                    json.put("text", ":exclamation::exclamation::exclamation:CPU crítico:exclamation::exclamation::exclamation:");
-                    Slack.sendMessage(json);
+                    
+                    if (contador < 2) {
+                        json.put("text", ":exclamation::exclamation::exclamation:CPU crítico:exclamation::exclamation::exclamation:");
+                        Slack.sendMessage(json);
+                        contador++;
+                    }
+                    
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                     try {
@@ -105,7 +113,7 @@ public class TelaDashboards extends javax.swing.JFrame {
 
                         log.seek(log.length());
 
-                        log.writeBytes("\nTeste");
+                        log.writeBytes("\nTeste" + 2 + "oba");
 
                         log.close();
                     } catch (FileNotFoundException e) {
@@ -143,8 +151,10 @@ public class TelaDashboards extends javax.swing.JFrame {
                         lblStatusDisco.setForeground(Color.red);
                         lblRestanteDisco.setForeground(Color.red);
                         
-                        json.put("text", ":exclamation::exclamation::exclamation:Disco crítico:exclamation::exclamation::exclamation:");
-                        Slack.sendMessage(json);
+                        if (contador2 < 2) {
+                            json.put("text", ":exclamation::exclamation::exclamation:Disco crítico:exclamation::exclamation::exclamation:");
+                            Slack.sendMessage(json);
+                        }
                         
                         String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                         try {
@@ -177,8 +187,10 @@ public class TelaDashboards extends javax.swing.JFrame {
                     lblStatusRAM.setForeground(Color.red);
                     lblRAMRestante.setForeground(Color.red);
                     
-                    json.put("text", ":exclamation::exclamation::exclamation:RAM crítica:exclamation::exclamation::exclamation:");
-                    Slack.sendMessage(json);
+                    if (contador3 < 2) {
+                        Slack.sendMessage(json);
+                        json.put("text", ":exclamation::exclamation::exclamation:RAM crítica:exclamation::exclamation::exclamation:");
+                    }
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                     try {
