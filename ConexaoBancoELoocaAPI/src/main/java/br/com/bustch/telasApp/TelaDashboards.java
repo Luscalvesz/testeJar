@@ -66,11 +66,8 @@ public class TelaDashboards extends javax.swing.JFrame {
     Integer contador = 0;
     Integer contador2 = 0;
     Integer contador3 = 0;
-<<<<<<< HEAD
     DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Date date = new Date();
-=======
->>>>>>> 148cf4f6796a8f3e4286e55bb0beb97192ac311d
     
     
     final long SEGUNDOS = (1000 * 3);
@@ -109,11 +106,7 @@ public class TelaDashboards extends javax.swing.JFrame {
                     
                     
                     if (contador < 2) {
-<<<<<<< HEAD
                         json.put("text", ":exclamation::exclamation::exclamation:CPU crï¿½tico:exclamation::exclamation::exclamation:");
-=======
-                        json.put("text", ":exclamation::exclamation::exclamation:CPU crítico:exclamation::exclamation::exclamation:");
->>>>>>> 148cf4f6796a8f3e4286e55bb0beb97192ac311d
                         Slack.sendMessage(json);
                         contador++;
                     }
@@ -168,11 +161,7 @@ public class TelaDashboards extends javax.swing.JFrame {
                         lblRestanteDisco.setForeground(Color.red);
                         
                         if (contador2 < 2) {
-<<<<<<< HEAD
                             json.put("text", ":exclamation::exclamation::exclamation:Disco crï¿½tico:exclamation::exclamation::exclamation:");
-=======
-                            json.put("text", ":exclamation::exclamation::exclamation:Disco crítico:exclamation::exclamation::exclamation:");
->>>>>>> 148cf4f6796a8f3e4286e55bb0beb97192ac311d
                             Slack.sendMessage(json);
                         }
                         
@@ -209,11 +198,7 @@ public class TelaDashboards extends javax.swing.JFrame {
                     
                     if (contador3 < 2) {
                         Slack.sendMessage(json);
-<<<<<<< HEAD
                         json.put("text", ":exclamation::exclamation::exclamation:RAM crï¿½tica:exclamation::exclamation::exclamation:");
-=======
-                        json.put("text", ":exclamation::exclamation::exclamation:RAM crítica:exclamation::exclamation::exclamation:");
->>>>>>> 148cf4f6796a8f3e4286e55bb0beb97192ac311d
                     }
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
