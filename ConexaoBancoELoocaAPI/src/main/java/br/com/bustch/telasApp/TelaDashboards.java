@@ -42,11 +42,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import br.com.bustch.telasApp.Slack;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.util.Date;
-
 /**
  *
  * @author Admin
@@ -66,8 +62,6 @@ public class TelaDashboards extends javax.swing.JFrame {
     Integer contador = 0;
     Integer contador2 = 0;
     Integer contador3 = 0;
-    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    Date date = new Date();
     
     
     final long SEGUNDOS = (1000 * 3);
@@ -123,7 +117,6 @@ public class TelaDashboards extends javax.swing.JFrame {
                                        "Disco: "+FormatUtil.formatBytes(apiLooca.getGrupoDeDiscos().getTamanhoTotal())+"\n"+
                                        "RAM: "+FormatUtil.formatBytes(apiLooca.getMemoria().getEmUso())+"\n"+
                                        "*************************************************************************************");
-//LocalDateTime.now()
                         log.close();
                     } catch (FileNotFoundException e) {
                         System.err.printf("Arquivo no encontrado: %s.\n", e.getMessage());
