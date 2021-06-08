@@ -16,6 +16,9 @@ public class Usuario {
 
     Diagnosticos dig = new Diagnosticos();
 
+    private String usuario;
+    private String senha;
+
     private Integer idDiagnostico = 0;
     private Integer fkMaquina = 0;
     private Boolean userAutenticated = false;
@@ -108,6 +111,8 @@ public class Usuario {
                     userAutenticated = true;
                     Integer id = rs.getInt("id");
                     fkMaquina = id;
+                    this.usuario = usuario;
+                    this.senha = senha;
                     System.out.println(fkMaquina);
                     
                     
@@ -121,10 +126,6 @@ public class Usuario {
 
                     dig.update(memoriaRam, volumes, processador, getFkMaquina());
 
-
-
-
-                    
                     
                 }else{
                     System.out.println("Erro ao tentar fazer o login");
@@ -145,6 +146,20 @@ public class Usuario {
     public void setFkMaquina(Integer fkMaquina) {
         this.fkMaquina = fkMaquina;
     }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
 }
-
-

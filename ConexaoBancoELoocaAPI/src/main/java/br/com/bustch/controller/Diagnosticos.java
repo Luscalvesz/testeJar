@@ -34,7 +34,7 @@ public class Diagnosticos {
                 stm.setDouble(4, maquina_id);
                 Boolean update = stm.execute();
                 if(!update){
-                    System.out.println("Registrado com sucesso! deu certo");
+                    System.out.println("Registrado com sucesso!");
                 }else{
                     System.out.println("Ocorreu um erro para registrar o dado!");
                 }

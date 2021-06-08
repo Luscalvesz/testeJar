@@ -42,6 +42,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import br.com.bustch.telasApp.Slack;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  *
@@ -59,6 +63,11 @@ public class TelaDashboards extends javax.swing.JFrame {
     Looca apiLooca = new Looca();
     Timer timer = new Timer();
     JSONObject json = new JSONObject();
+    Integer contador = 0;
+    Integer contador2 = 0;
+    Integer contador3 = 0;
+    DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    Date date = new Date();
     
     
     final long SEGUNDOS = (1000 * 3);
@@ -83,30 +92,38 @@ public class TelaDashboards extends javax.swing.JFrame {
                 FormatUtil.formatBytes(apiLooca.getMemoria().getEmUso());
                 
                 System.out.println(apiLooca.getMemoria().getDisponivel());
-                
-                
-                dig.update(memoriaRam, volumes, processador, user.getFkMaquina());
-                
+
+                user.autenticar(user.getUsuario(), user.getSenha());
+
                 lblProcesadorTotal.setText(apiLooca.getProcessador().getNumeroCpusFisicas().toString());
                 lblProcesadorEmUso.setText(String.format("%.2f", apiLooca.getProcessador().getUso()));
                 lblProcesadorRestante.setText(String.format("%.2f", restanteCPU));
                 
                 if (restanteCPU <= 20.0) {
-                    lblStatusCPU.setText("Crítico");
+                    lblStatusCPU.setText("Crï¿½tico");
                     lblProcesadorRestante.setForeground(Color.red);
                     lblStatusCPU.setForeground(Color.red);
                     
-                    json.put("text", ":exclamation::exclamation::exclamation:CPU crítico:exclamation::exclamation::exclamation:");
-                    Slack.sendMessage(json);
+                    
+                    if (contador < 2) {
+                        json.put("text", ":exclamation::exclamation::exclamation:CPU crï¿½tico:exclamation::exclamation::exclamation:");
+                        Slack.sendMessage(json);
+                        contador++;
+                    }
+                    
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                     try {
                         RandomAccessFile log = new RandomAccessFile(caminhoPasta, "rw");
 
                         log.seek(log.length());
-
-                        log.writeBytes("\nTeste" + 2 + "oba");
-
+                        
+                        
+                        log.writeBytes(LocalDateTime.now()+":"+"CPU: "+apiLooca.getProcessador().getUso()+"\n"+
+                                       "Disco: "+FormatUtil.formatBytes(apiLooca.getGrupoDeDiscos().getTamanhoTotal())+"\n"+
+                                       "RAM: "+FormatUtil.formatBytes(apiLooca.getMemoria().getEmUso())+"\n"+
+                                       "*************************************************************************************");
+//LocalDateTime.now()
                         log.close();
                     } catch (FileNotFoundException e) {
                         System.err.printf("Arquivo no encontrado: %s.\n", e.getMessage());
@@ -139,12 +156,14 @@ public class TelaDashboards extends javax.swing.JFrame {
                     Double valueDouble = Double.parseDouble(discoRestante);
                     
                     if (valueDouble <= 10.0) {
-                        lblStatusDisco.setText("Crítico");
+                        lblStatusDisco.setText("Crï¿½tico");
                         lblStatusDisco.setForeground(Color.red);
                         lblRestanteDisco.setForeground(Color.red);
                         
-                        json.put("text", ":exclamation::exclamation::exclamation:Disco crítico:exclamation::exclamation::exclamation:");
-                        Slack.sendMessage(json);
+                        if (contador2 < 2) {
+                            json.put("text", ":exclamation::exclamation::exclamation:Disco crï¿½tico:exclamation::exclamation::exclamation:");
+                            Slack.sendMessage(json);
+                        }
                         
                         String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                         try {
@@ -164,7 +183,7 @@ public class TelaDashboards extends javax.swing.JFrame {
                         lblStatusDisco.setForeground(Color.blue);
                     }
                     
-                    lblCPU9.setText("Disponível do Disco " + 1 + ":");
+                    lblCPU9.setText("Disponï¿½vel do Disco " + 1 + ":");
                     lblDiscoUsado.setText(FormatUtil.formatBytes(discoUsado));
                 
                 
@@ -173,12 +192,14 @@ public class TelaDashboards extends javax.swing.JFrame {
                 lblRAMRestante.setText(FormatUtil.formatBytes(apiLooca.getMemoria().getDisponivel()));
                 
                 if (apiLooca.getMemoria().getDisponivel() <= 400000000) {
-                    lblStatusRAM.setText("Crítico");
+                    lblStatusRAM.setText("Crï¿½tico");
                     lblStatusRAM.setForeground(Color.red);
                     lblRAMRestante.setForeground(Color.red);
                     
-                    json.put("text", ":exclamation::exclamation::exclamation:RAM crítica:exclamation::exclamation::exclamation:");
-                    Slack.sendMessage(json);
+                    if (contador3 < 2) {
+                        Slack.sendMessage(json);
+                        json.put("text", ":exclamation::exclamation::exclamation:RAM crï¿½tica:exclamation::exclamation::exclamation:");
+                    }
                     
                     String caminhoPasta = String.format("/home/%s/logBusTech/logBusTech.dat", System.getProperty("user.name"));
                     try {
@@ -270,7 +291,7 @@ public class TelaDashboards extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Yu Gothic UI Semilight", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Bustech - Soluções de Hardware Inteligente");
+        jLabel3.setText("Bustech - Soluï¿½ï¿½es de Hardware Inteligente");
         jPanel5.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(52, 16, -1, 30));
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -485,7 +506,7 @@ public class TelaDashboards extends javax.swing.JFrame {
         lblCPU9.setBackground(new java.awt.Color(255, 193, 49));
         lblCPU9.setFont(new java.awt.Font("Dialog", 0, 19)); // NOI18N
         lblCPU9.setForeground(new java.awt.Color(73, 73, 73));
-        lblCPU9.setText("Disponível:");
+        lblCPU9.setText("Disponï¿½vel:");
 
         jPanel10.setBackground(new java.awt.Color(255, 193, 49));
 
@@ -618,7 +639,7 @@ public class TelaDashboards extends javax.swing.JFrame {
         lblCPU2.setBackground(new java.awt.Color(73, 73, 73));
         lblCPU2.setFont(new java.awt.Font("Dialog", 0, 19)); // NOI18N
         lblCPU2.setForeground(new java.awt.Color(73, 73, 73));
-        lblCPU2.setText("Número de cores do processador:");
+        lblCPU2.setText("Nï¿½mero de cores do processador:");
 
         lblCPU1.setBackground(new java.awt.Color(73, 73, 73));
         lblCPU1.setFont(new java.awt.Font("Dialog", 0, 19)); // NOI18N

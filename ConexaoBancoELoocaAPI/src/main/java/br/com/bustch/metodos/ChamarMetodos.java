@@ -33,7 +33,9 @@ public class ChamarMetodos {
 
 //        maq.list("select * from tb_maquinas;");
 
-        user.autenticar("usuario1", "senha1");
+//        user.autenticar("usuario1", "senha1");
+
+        user.autenticar("usuario2", "senha1");
 
 
 
